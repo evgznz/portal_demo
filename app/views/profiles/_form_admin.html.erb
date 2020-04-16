@@ -1,0 +1,23 @@
+
+<%= bootstrap_form_for @profile do |f|%>
+
+<%= f.check_box :company_active  ,label: "Включена" %>
+  <%= f.select :user_id, User.all.map { |item| [item.email,item.id] } ,label: "Пользователь" %>
+    <%= f.text_field :company_name,label:"Название" %>
+    <%= f.text_field :telefon_mobile ,label: "Контактный телефон"%>
+    <%= f.text_field :company_email,value: "",label: "Электронная почта" %>
+    <%= f.text_area :company_org_address ,label: "Юридический адрес"%>
+
+    <%= f.text_field :company_address,label: "Фактический адрес" %> 
+
+    <%= f.text_field :contact_name,label: "Контактное лицо"%>
+ 
+<%= f.text_area :print_header ,label: "Заголовок"%>
+<%= f.text_area :print_cellar,label: "Примечение " %>
+<%= f.text_field :company_bank,label: "Название Банка" %>
+<%= f.text_field :company_inn,label: "ИНН" %>
+<%= f.text_field :company_kpp ,label: "КПП"%>
+<%= f.text_field :agreement ,label: "Договор"%>
+<%= f.collection_check_boxes :bild ,Bilding.all, :name,:name,label: "Строение:  " ,inline: true%>
+<%= f.submit %>
+<% end %>

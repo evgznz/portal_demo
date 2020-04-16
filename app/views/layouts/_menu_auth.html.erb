@@ -1,0 +1,53 @@
+  <% if user_signed_in? %>
+               <% if User.find(current_user.id).admin %> 
+                 <div class="container-field">         <p class="alert alert-warning">Вы вошли как администратор <%= current_user.email %>
+
+                 </p> </div>
+               <% else %>
+
+                 <div class="container-field">         <p class="alert alert-info">Вы вошли как <%= current_user.email %>                                
+
+                 </p> </div>
+          <% end %>
+  <% end %>
+
+
+
+<% if notice %>
+<div class="container-field">
+            <p class="alert alert-info"><%= notice %></p>
+            </div>
+        <% end %>
+<% if alert %>
+           <div class="container-field">
+            <p class="alert alert-warning "><%= alert %></p>
+          </div>
+       <% end%> 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+  <div class="container">
+     <div class="row">
+        </div>
+            <% if user_signed_in? %>
+
+                   <div class="navbar-brand " id="navbarResponsive">
+                       <ul class="navbar-nav ml-auto">
+                            <% if User.find(current_user.id).admin %> 
+                    
+                                              <li class="nav-item"> <%= link_to 'Новый профиль компании' , new_profile_path ,class: "nav_link nav_font"%></li>
+                                              <li class="nav-item">	<%= link_to 'Управление' , managements_path,class: "nav_link nav_font"%>  </li>
+                                              <li class="nav-item"> <%= link_to 'Создать нового пользователя', new_management_path  ,class: 'nav_link nav_font' %> </li>
+                           <% end %>
+
+
+                         <li class="nav-item">	<%= link_to 'Профиль' , root_path,class: "nav_link nav_font"%>  </li>
+                         <li class="nav-item">	
+                         
+                               <%= link_to 'Выйти', destroy_user_session_path, :method => :delete,class: "nav_link nav_font" %> 
+                         </li>
+                            <% end %>
+ 
+        </li>
+      </ul>
+</div>
+</div>
+</nav>

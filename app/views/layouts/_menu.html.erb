@@ -1,0 +1,47 @@
+  <% if user_signed_in? %>
+               <% if User.find(current_user.id).admin %> 
+                 <div class="container-field">         <p class="alert alert-warning">Вы вошли как администратор <%= current_user.email %>
+
+                 </p> </div>
+               <% else %>
+
+                 <div class="container-field">         <p class="alert alert-info">Вы вошли как <%= current_user.email %>                                
+
+                 </p> </div>
+          <% end %>
+  <% end %>
+
+
+
+<% if notice %>
+            <div class="container-field">
+                   <p class="alert alert-info"><%= notice %></p>
+            </div>
+<% end %>
+<% if alert %>
+           <div class="container-field">
+                    <p class="alert alert-warning "><%= alert %></p>
+          </div>
+<% end%> 
+
+            <% if user_signed_in? %>
+<div class="d-flex flex-warp flex-md-row flex-sm-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+      <h5 class="my-0 mr-md-auto font-weight-normal">Выписка пропусков для арендаторов</h5>
+      <nav class="my-2 my-md-0 mr-md-3">
+
+                            <% if User.find(current_user.id).admin %> 
+                                              <%= link_to 'Новый профиль компании' , new_profile_path ,class: "btn btn-outline-primary"%>
+                                              <%= link_to 'Управление' , managements_path,class: "btn btn-outline-primary"%> 
+                                              <%= link_to 'Мониторинг принеторв',printers_monitoring_index_path,class: "btn btn-outline-primary" %>
+                                              <%= link_to 'Создать нового пользователя', new_management_path  ,class: 'btn btn-outline-primary' %> 
+
+                           <% end %>
+
+                         	<%= link_to 'Профиль' , root_path,class: "btn btn-outline-primary"%> 
+
+                          <%= link_to 'Инструкция ',managements_help_path ,class: "btn btn-outline-primary"%>
+                           <%= link_to 'Выйти', destroy_user_session_path, :method => :delete,class: "btn btn-outline-primary" %>      
+
+      </nav>
+    </div>
+  <% end %>

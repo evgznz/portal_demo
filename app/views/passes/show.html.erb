@@ -1,0 +1,48 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+
+<p id="notice"><%= notice %></p>
+
+<p ><%= @profiles.company_name %> </p>
+<p> <%= @profiles.print_header %> </p>
+<p>
+  <strong>Имя:</strong>
+  <%= @pass.name %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @pass.description %>
+</p>
+
+<p>
+  <strong>Дата:</strong>
+  <%= @pass.date %>
+</p>
+
+<p>
+  <strong>Строение:</strong>
+  <%= @pass.bild %>
+</p>
+<%= @profiles.print_cellar %>
+<p>
+ <%= @profiles.company_email%>
+
+</p>
+<div>
+
+<center>
+<%= link_to 'Вернуться назад', profile_passes_path ,class: "btn btn-primary" %> 
+
+	<% text =  "Отравить на печать в  строение #{@pass.bild}" %>
+<%= link_to text, print_profile_passes_path(@profiles,@pass) , class: "btn btn-success" %> 
+
+</center>
+
+</div>
+

@@ -1,0 +1,44 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+ <div class="container">
+<div class="row">
+
+  <div class="col">  строение </div>
+  <div class="col">   Остаток тонера,% <br> ресурс картриджа листов,шт.  </div>
+  <div class="col"> IP  адрес </div>
+  <div class="col"> Количество заявок</br> напечатано,шт. </div>
+  <div class="col"> Номере для SMS </div>
+  
+  <div class="col"> SMS оповещение </div>
+</div>
+
+<%  @printers.each do |item| %>
+<div class="row">
+  <div class="col">
+       <% name_url = "Проверить #{item['name']}"%> 
+           <%= link_to name_url ,printers_monitoring_check_path(item['name']), class: "btn btn-outline-success "%> 
+ </div> 
+ <div class="col"> <p class="<%= item['pages_css'] %>" ><%= item['comment'] %> <%= 1600 -  item['pages_print'] unless item['pages_print'].nil? %> <br><small>  <%= item['check_time'].strftime(" %F %T") unless item['check_time'].nil? %> </small></p> </div>
+  <div class="col"> <%= item['printer_ip'] %> </div>
+
+  <div class="col"> <%= item['summa'] %> </div>
+  <div class="col"> <%= item['telefon'] %> </div>
+  <% if item['telefon'].length == 11 %>
+          <div class="col">  <%= link_to "отключить ",printers_monitoring_disable_sms_path(item['id']) , class: "btn btn-outline-primary "%>  </div>
+  <% else %>
+
+          <div class="col">  <%= link_to "включить",printers_monitoring_enable_sms_path(item['id']) , class: "btn btn-outline-success "%> </div>
+<% end %>
+  
+</div>
+<% end %>
+ <center>
+
+
+ <%= link_to " Оповестить дежурного инженера Westcall о проблеммах с принтером", "",class: "btn btn-outline-info " %></center>
+</div>

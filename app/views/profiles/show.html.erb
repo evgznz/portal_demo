@@ -1,0 +1,22 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+<div class="container">
+<div class ="row">
+  <div class="col">Навзвание: <%=  @profile.company_name %> <br> договор: <%= @profile.agreement %> </div>
+  <div class="col"> Адрес:<%= @profile.company_address %>  <br> <b>строение:  <%= @profile.bild.gsub(/[",\]\[]/," ") %>   </b></div>
+  <div class="col">Контактное лицо: <%= @profile.contact_name %> </div>
+  <div class="col">Контакты: <%= @profile.telefon_mobile %> /  <%=  @profile.company_email%></div>
+    <div class="col">Название Банка: <%= @profile.company_bank %></div> 
+    <div class="col">ИНН:<%=  @profile.company_inn %> </div>
+    <div class="col">КПП:<%= @profile.company_kpp %> </div>
+    <div class="col"> Юридический адрес: <%= @profile.company_org_address %> </div>
+</div>
+<div class="row"> 
+  <div class="col"> <%=  link_to 'Редактировать профиль',edit_profile_path(@profile) ,class: "btn btn-outline-primary"%> </div>
+</div>
+</div>

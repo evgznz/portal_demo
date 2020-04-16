@@ -1,0 +1,14 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+
+<h1>Создание заявки на проход </h1>
+
+
+<%= render 'form', pass: @pass %>
+
+<%= link_to 'Вернуться назад без сохоранения изменений', profile_passes_path %>

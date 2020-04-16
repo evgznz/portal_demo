@@ -1,0 +1,60 @@
+<% if RENOM_DEBUG %>
+<div class="alert alert-info">
+
+    <%= f.hidden_field :user_id, value: @profile.user_id %>
+<%= params %>
+<%= current_user.id  %>
+</div>
+<% end  %>
+<% if current_user.admin %>
+<%= bootstrap_form_for @profile do |f|%>
+
+  <%= f.check_box :company_active,label: "Включена" %>
+
+    <%= f.select :user_id, User.where(user_active: true).map { |item| [item.email,item.id] } ,label: "Пользователь " %>
+    <%= f.text_field :company_name,label:"Название" %>
+    <%= f.text_field :telefon_mobile ,label: "Контактный телефон"%>
+    <%= f.text_field :company_email,label: "Электронная почта" %>
+    <%= f.text_area :company_org_address ,label: "Юридический адрес"%>
+
+    <%= f.text_field :company_address,label: "Фактический адрес" %> 
+
+    <%= f.text_field :contact_name,label: "Контактное лицо"%>
+  
+<%= f.text_area :company_description ,label: "Описание  Компании"%>
+<%= f.text_area :print_header ,label: "Заголовок печатной формы"%>
+<%= f.text_area :print_cellar,label: "Примечение печатной формы" %>
+
+<%= f.text_area :company_bank,label: "Данные банка" %>
+<%= f.text_field :company_inn,label: "ИНН" %>
+<%= f.text_field :company_kpp ,label: "КПП"%>
+<%= f.text_field :agreement ,label: "Договор аренды"%>
+
+<% bilds = Profile.find(params[:id]).bild.split(" ") %>
+<% bilds_all = [] %>
+<% Bilding.all.each do |item| %>
+        <% bilds_all.append(item[:name])  %>
+<% end %>
+
+<%  bilds_end = bilds_all - bilds %>
+<%= f.submit " Сохранить" %>
+<% end %>
+<% elsif current_user.id == @profile.user_id %>
+
+<%= bootstrap_form_for @profile do |f|%>
+    <%= f.text_field :telefon_mobile ,label: "Контактный телефон"%>
+    <%= f.text_field :company_email,label: "Электронная почта" %>
+
+
+    <%= f.text_field :contact_name,label: "Контактное лицо"%>
+    <%= f.hidden_field :user_id, value: @profile.user_id %>
+ 
+<%= f.text_area :print_header ,label: "Заголовок печатной формы"%>
+<%= f.text_area :print_cellar,label: "Примечение печатной формы" %>
+
+
+
+<%= f.submit " Сохранить" %>
+
+<% end %>
+<% end %>

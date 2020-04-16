@@ -1,0 +1,22 @@
+<%= bootstrap_form_for @profile do  |f|%>
+    <%= f.text_area :company_name,label:"Название" %>
+    <%= f.text_field :telefon_mobile ,label: "Контактный телефон"%>
+    <%= f.text_field :company_email,label: "Электронная почта" %>
+    <%= f.text_area :company_org_address ,label: "Юридический адрес"%>
+
+    <%= f.text_field :company_address,label: "Фактический адрес" %> 
+
+    <%= f.text_field :contact_name,label: "Контактное лицо"%>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+ 
+<%= f.check_box :company_active  %>
+<%= f.text_area :print_header %>
+<%= f.text_area :print_cellar %>
+<%= f.text_field :company_org_address %>
+<%= f.text_field :company_bank %>
+<%= f.text_field :company_inn %>
+<%= f.text_field :company_kpp %>
+<%= f.text_field :company_email %>
+<%= f.collection_check_boxes :bild , Bilding.all ,:name,:name , inline: true ,label: "Строения" %>
+<%= f.submit %>
+<% end %>

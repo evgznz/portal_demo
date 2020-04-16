@@ -1,0 +1,31 @@
+<Printer <%= @bild.printer_name %>>
+UUID urn:uuid:<%= @bild.printer_uid %>
+Info HP LaserJet <%=  @bild.printer_name %> 
+Location <%= @bild.name  %>
+MakeModel LaserJet M203-M206 <%= @bild.printer_name  %>
+DeviceURI ipps://<%=  @bild.printer_ip %>:631/ipp/print
+State Idle
+StateTime 1574629782
+ConfigTime 1574629784
+Type 4180
+Accepting Yes
+Shared No
+JobSheets none none
+QuotaPeriod 0
+PageLimit 0
+KLimit 0
+OpPolicy default
+ErrorPolicy retry-job
+Option copies 1
+Option cups-browsed true
+Option finishings 0
+Option job-cancel-after 10800
+Option job-hold-until no-hold
+Option job-priority 50
+Option notify-events job-completed
+Option notify-lease-duration 86400
+Option number-up 1
+Option orientation-requested 0
+Option print-quality 0
+</Printer>
+

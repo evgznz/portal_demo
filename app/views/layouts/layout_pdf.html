@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title> </title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+    }
+      .page {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1.5cm;
+        margin: 1cm auto;
+        background: white;
+    }
+      .title {
+      padding-top: 0cm;
+      height:  4cm;
+      background: green;
+      }
+      .text_body {
+        padding-top: 3cm;
+        height:15cm;
+      }
+      .text_end {
+        padding-top: 2cm;
+        height: 4cm;
+      }
+      .text_time {
+       padding-top: 2px;
+      text-align: center;
+      }
+   </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="title">
+    <%= @profiles.company_name %>  
+    <%= @profiles.company_address %> <br>
+    <%= @profiles.company_bank %>  
+    Юр.адрес: <%= @profiles.company_org_address%> <br> 
+  ИНН/КПП: <%= @profiles.company_inn %> /    <%= @profiles.company_kpp %>
+  </div>
+    <hr >
+      <div class="text_body">  
+         <h2> Компания <%= @profiles.company_name %> <br> просит разрешить проход на <%= @pass.date %> в строение <%= @pass.bild %>   </h2>
+      <%= yield %>
+    </div>
+    <hr>
+      <div class="text_end" > 
+            контактное лицо :  <%= @profiles.contact_name %>  /    <%= @profiles.telefon_mobile %> / <%= @profiles.company_email %>  
+            
+      </div>
+      <div class="text_time" >
+         Отправлено на печать:  <%= @pass.report_time.strftime(" %F %T ") %>
+        </div>
+</div>
+  </body>
+</html>

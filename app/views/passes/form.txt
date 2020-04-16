@@ -1,0 +1,40 @@
+
+<%= simple_form_for  @pass, html: {class: "text-left "} do |form| %>
+  <% if pass.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pass.errors.count, "error") %> prohibited this pass from being saved:</h2>
+
+      <ul>
+      <% pass.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div> Форма для заполнения заявк</div>
+     <%= form.error_notification %>
+    <%= form.input :name,
+             size: "70x2",
+             label: "Имя компании" %>
+
+    <%= form.input :description ,
+             size: "70x5",
+             label: "Описание"%>
+
+    <%= form.input :date ,as: :date, 
+                   start_year: Date.today.year ,
+                   end_year: Date.today.year + 1, 
+                   order: [:day,:month, :year],
+                   label: "Календарь" %>
+    <%= form.input :bild ,as: :radio_buttons ,collection: %w{1 2 34}  ,prompt: :translate ,label: "Строение" %> 
+
+
+  <div>
+	  <%= form.select(:user_id,
+                     Profile.where(user_id: current_user.id ).collect {|p| [ p.company_name ,p.id] },label: "Выберите компанию")%>
+    </div>
+    <div>
+    <%= form.submit "Создать заявку" %>
+    </div>
+
+ <% end %>

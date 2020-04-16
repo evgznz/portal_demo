@@ -1,0 +1,55 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+ <table class="table table-hover ">
+         <thead>  </thead>
+         <tbody>
+<% if User.find(current_user.id).admin  %>
+         <% User.all.each do |user| %>
+
+           <tr> 
+           <td> <%= user.email  %> <br>
+                 <% user.profiles.each do |profile|  %>
+                   <div> <%= link_to profile.company_name , edit_profile_path(profile) %> <br> 
+                     <% if  profile.bild.split(' ').length == 1 %> 
+                            <p> строение: <%= profile.bild  %>[<%= link_to  "#{profile.passes.count}", profile_passes_path(profile.id)  %>]</p>
+
+                      <% else %>
+
+                            <p> строения: <%= profile.bild  %>[<%= link_to  "#{profile.passes.count}", profile_passes_path(profile.id)  %>]</p>
+
+                      <% end %>
+                </div>
+            <% end  %>
+            </td>
+              <td> 
+                  <% if  user.user_active %>
+                    Дата изменения пароля и пароль: <br>  <%= user.updated_at.strftime(" %F %T ") %> <i><%= user.password_name  %></i> 
+                <% else %>
+                  Дата отключения: <br>   <%= user.updated_at.strftime(" %F %T ") %> 
+                <% end %>
+                </td>
+              <td> 
+                  <% if  user.user_active %>
+                        <%= link_to  "Выслать пароль на: #{user.email}",  managements_email_login_password_path(user.id),class: "btn btn-outline-primary "%> 
+                 <% else %>
+                        <%= link_to  "Включить: #{user.email}",  managements_email_login_password_path(user.id),class: "btn btn-outline-success "%> 
+                 <% end %>
+                 </td>
+                <% if false %>
+                <%= link_to   profilee.telefon_mobile ,managements_sms_login_password_path(user.id),class: "btn btn-outline-primary" %>  
+                <% end %>
+                <td> 
+                  <% if  user.user_active %>
+                  <%= link_to "отключить #{user.email} " , managements_disable_login_path(user.id),class: "btn btn-outline-danger" %>      <% end %>
+                 </td>
+
+        </tr>
+        <% end %>
+            </tbody>
+            </table>
+<% else  %>
+<%  end %>

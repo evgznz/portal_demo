@@ -1,0 +1,2 @@
+class Bilding < ApplicationRecord
+end

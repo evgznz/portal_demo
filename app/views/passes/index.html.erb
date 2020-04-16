@@ -1,0 +1,59 @@
+
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+<%= link_to 'Новая заявка на проход',new_profile_pass_path ,class: "btn btn-success" %>
+</div>
+</div>
+  <% @passes.each do |pass| %>
+
+    <div class="row">
+      <div class="col-sm-12">
+       	<% unless pass.bild.nil? %> 
+             
+          <b> <%= pass.date %>  <%= @profiles.company_name %> </b>
+
+          <br>
+          <%= pass.name %> <%= pass.description %> 
+          <br>
+
+       </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+       
+
+           <% if not  pass.report_print.nil?  %>
+             <span class=""> Напечатано :<%= pass.report_print.to_datetime.strftime(" %F %T") %> строение: <%= pass.bild %> </span>       
+
+                    <% end %>
+   	       <% end%>
+       </div>
+    </div>
+     <div class="row">
+       <div class="col-sm-12">
+                  <% if pass.report_print.nil?  %>
+              
+
+                        <%= link_to "Отправить на печать в строение: #{pass.bild}", print_profile_passes_path(@profiles,pass) ,class: "btn btn-outline-primary"%>
+                        <%= link_to 'Показать заявку', profile_pass_path(@profiles,pass), class: "btn btn-outline-primary" %>
+                        <%= link_to 'Редактировать', edit_profile_pass_path(@profiles,pass),class: "btn btn-outline-primary" %> 
+                        <%= link_to 'Удалить', profile_pass_path(@profiles,pass), method: :delete, data: { confirm: 'Уверены ?' },class: "btn btn-danger" %>
+
+                   <% end %>
+       </div>
+     </div>
+    <% end %>
+
+<%= will_paginate @passes ,previous_label: "Назад" , next_label: "Вперед" ,inner_window: 1 ,class: "pagination-lg-12"%>
+</div>

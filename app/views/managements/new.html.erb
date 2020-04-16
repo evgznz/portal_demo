@@ -1,0 +1,10 @@
+Создание нового пользователя 
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+
+
+<%= render 'form_html' %>

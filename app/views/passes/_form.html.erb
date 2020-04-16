@@ -1,0 +1,44 @@
+<% bild_length =  @profiles.bild.split(" ").length   %>
+<%= bootstrap_form_with(model: [@profiles, pass], local: true ,html: {class: ""} )do |form| %>
+  <% if pass.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pass.errors.count, "error") %> Заполните все поля :</h2>
+
+      <ul>
+      <% pass.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div> Форма для заполнения заявк  </div>
+
+ <% pass.user_id = current_user.id  %>
+ <%= form.hidden_field :user_id  %>
+ <%= form.hidden_field :profile_id %>
+ <%= form.text_area  :name ,label: "Данные о поситителе"%>
+ <%= form.text_area  :description ,label: "Описание или паспортные данные"%>
+
+    <%= form.date_field  :date,label: "Выберите дату прохода " %>
+
+    <%= form.form_group :bild,label: {text: "Строение"}   do %> 
+   <% if bild_length == 1 %>
+      <p>  строение:
+       <%= bild_name = @profiles.bild.split(" ")[0] %>
+      </p>
+       <%= form.hidden_field :bild ,value: bild_name  %>
+
+   <% else %>
+      <% @profiles.bild.split(" ").each do |item| %>
+        <%= form.radio_button :bild, item,  inline: true %>
+
+    <% end %>
+    <% end %>
+  <% end %>
+
+    <div>
+    <%= form.submit "Создать заявку #{ @company_name }" %>
+    </div>
+
+ <% end %>
+

@@ -1,0 +1,27 @@
+<% if RENOM_DEBUG  %>
+    <div class="alert alert-info">
+        <%= params %>
+        <%= current_user.id  %>
+    </div>
+<%  end %>
+<div class="container">
+  <% @company_profiles.each do |item| %>
+      
+    <% if item.company_active %>
+
+  <div class="row">
+      <div class="col-5"> Название: <%= item.company_name %> </div> 
+      <div class="col"> Контактный email:  <%= item.company_email %> </div> 
+      <div class="col">   <%= item.company_address %> </div> 
+   </div>
+   <div class="row">
+      <div class="col-2"> <%=  link_to 'Заявки на проход' , profile_passes_path(item), class: "btn btn-outline-primary"%>  </div>
+
+     <div class="col-2"> <%= link_to 'Редактировать профиль',show_profile_path(item) ,class: "btn btn-outline-primary" %> </div>
+
+  </div>
+  <% end %>
+
+<% end%>
+</div>
+
