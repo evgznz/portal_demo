@@ -18,7 +18,7 @@ class CreateBildings < ActiveRecord::Migration[5.2]
       t.text :percent_spool
       t.text :error_spool
       t.integer :summa , default: 0
-      t.string :telefon , default: '79266074939'
+      t.string :telefon , default: '7926000000'
       t.timestamps
     end
   end

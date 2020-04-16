@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 5) do
     t.text "percent_spool"
     t.text "error_spool"
     t.integer "summa", default: 0
-    t.string "telefon", default: "79266074939"
+    t.string "telefon", default: "79926000000"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
